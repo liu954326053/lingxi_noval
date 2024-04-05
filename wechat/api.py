@@ -113,7 +113,7 @@ def find_content_sync(book_name, user):
     book_id = md5.hexdigest()
     content = find_noval_content(book_name)['concent']
     content_cache[book_id] = content
-    res = '点击链接查看全文：\n https://liuyf.zicp.io/content?book=' + book_id
+    res = '点击链接查看全文：\n https://flask-50s3-100368-4-1325545965.sh.run.tcloudbase.com/content?book=' + book_id
     send_customer_service_message(user, res.encode().decode('unicode-escape'))
 
 def send_customer_service_message(user_openid, message):
