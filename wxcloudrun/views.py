@@ -4,7 +4,8 @@ from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
-
+from noval.api import find_noval_by_name, find_noval_content
+from wechat.api import wechat_msg,get_content_by_id
 
 @app.route('/')
 def index():
@@ -64,3 +65,26 @@ def get_count():
     """
     counter = Counters.query.filter(Counters.id == 1).first()
     return make_succ_response(0) if counter is None else make_succ_response(counter.count)
+
+
+@app.route('/content', methods=['GET'])
+def get_content():
+    book = request.args.get('book')
+    return get_content_by_id(book)
+
+
+@app.route('/find_noval_by_name', methods=['GET'])
+def find_book_list():
+    name = request.args.get('name')
+    return find_noval_by_name(name)
+
+
+@app.route('/find_noval_content', methods=['GET'])
+def find_content():
+    name = request.args.get('name')
+    return find_noval_content(name)
+
+
+@app.route('/wechat', methods=['GET', 'POST'])
+def wechat():
+    return wechat_msg(request)
